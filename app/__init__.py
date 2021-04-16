@@ -10,6 +10,7 @@ from .ds_config import EXAMPLES_API_TYPE
 from .rooms import examples as rooms_examples
 from .click import examples as click_examples
 from .monitor import examples as monitor_examples
+from flask_sqlalchemy import SQLAlchemy
 from .views import core
 
 session_path = "/tmp/python_recipe_sessions"
@@ -24,6 +25,11 @@ else:
     app = Flask(__name__)
 app.config.from_pyfile("config.py")
 
+"""app.config.from_object('config')
+app.config.from_pyfile('config.py')
+
+db = SQLAlchemy(app)
+"""
 # See https://flask-wtf.readthedocs.io/en/stable/csrf.html
 csrf = CSRFProtect(app)
 
@@ -104,3 +110,5 @@ if "DYNO" in os.environ:  # On Heroku?
     app.logger.setLevel(logging.INFO)
     app.logger.info("Recipe example startup")
     app.config.update(dict(PREFERRED_URL_SCHEME="https"))
+
+

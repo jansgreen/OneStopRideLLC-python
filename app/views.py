@@ -3,7 +3,6 @@ import sqlite3
 import os
 import bcrypt as Bcrypt
 import base64
-from .models import User, db
 
 from flask import  (
     render_template,
@@ -20,11 +19,12 @@ from flask import request
 from .ds_config import DS_CONFIG
 from .ds_config import EXAMPLES_API_TYPE
 from .forms import RegistrationForm, LoginForm
+#from .models import db
+import pyodbc
 
 core = Blueprint("core", __name__)
 
 currentdirectory = os.path.join(os.path.dirname(__file__))
-
 
 @core.route("/")
 def index():
@@ -70,17 +70,26 @@ def register():
                 try:
                     connection = sqlite3.connect(currentdirectory + "\database2.db")
                     cursor = connection.cursor()
-                    cursor.execute("create table Drivers (username, password, email, phone)") #.format(username=form.username.data, email=form.email.data, password=hashed_password, phone=form.password.data)
+                    cursor.execute("create table Drivers (lang_name, lang_email, lang_password, lang_phone)") #.format(data=data)
                 except sqlite3.OperationalError:
                     print("la tabla ya existe {username}".format(username=form.username.data))
                     print(hashed_password)
 
-                user = User(username=form.username.data, password=hashed_password, email=form.email.data, phone=form.phone.data)
-                db.session.add(user)
-                db.session.commit
-                session.modified = True
-                cursor.execute("INSERT INTO Drivers VALUES ('{username}', '{password}', '{email}', '{phone}')".format(username=form.username.data, password=hashed_password, email=form.email.data, phone=form.phone.data)) #
-                for row in cursor.execute('SELECT * FROM Drivers ORDER BY username'):
+                #user = User(username=form.username.data, password=hashed_password, email=form.email.data, phone=form.phone.data)
+                #db.session.add(user)
+                #db.session.commit
+                #session.modified = True
+                #cursor  =  cnxn . cursor ()
+                
+                lang_list = [
+                    ("lang_name", form.username.data),
+                    ("lang_email", form.email.data),
+                    ("lang_passwordb", hashed_password),
+                    ("lang_phone", form.password.data),
+                    ]
+                cursor.execute("INSERT INTO Drivers(lang_name) VALUES('?,?')", ("lang_name", 3))
+                
+                for row in cursor.execute('SELECT * FROM Drivers ORDER BY lang_name'):
                     print(row)
                 connection.commit()
                 return redirect(url_for('core.index'))

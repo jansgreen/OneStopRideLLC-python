@@ -1,14 +1,33 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+from pymongo import MongoClient
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
+
+#client = MongoClient("mongodb+srv://jansOneStop:Lonegreen07@cluster0.7ltr0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+#dbColl = client["Drivers"]
+#db = dbColl["Driver"]
 
 
-class User(db.Model):
-    Id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text, nullable=False)
-    password = db.Column(db.Text, unique=True, nullable=False)
-    email = db.Column(db.Text, nullable=False)
-    phone = db.Column(db.Text, nullable=False)
+
+
+
+#class User(db.Model, UserMixin):
+
+#    __tablename__ = 'blog_user'
+
+#    id = db.Column(db.Integer, primary_key=True)
+#    name = db.Column(db.String(80), nullable=False)
+#    email = db.Column(db.String(256), unique=True, nullable=False)
+#    password = db.Column(db.Integer, nullable=False)
+#    phone = db.Column(db.String(80), nullable=False)
+#    is_admin = db.Column(db.Boolean, default=False)
+
+#    def __init__(self, name, email):
+#        self.name = name
+#        self.email = email
+
+#    def __repr__(self):
+#        return f'<User {self.email}>'
+
     
 
 
