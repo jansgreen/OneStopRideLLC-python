@@ -73,25 +73,53 @@ def register():
                     cursor.execute("create table Drivers (lang_name, lang_email, lang_password, lang_phone)") #.format(data=data)
                 except sqlite3.OperationalError:
                     print("la tabla ya existe {username}".format(username=form.username.data))
-                    print(hashed_password)
+
+                target_fish_name = "jansgreen"                
+                cursor.execute("INSERT INTO Drivers(lang_name, lang_email, lang_password, lang_phone) VALUES(?,?,?,?)", [(form.username.data), (form.email.data), (hashed_password), (form.phone.data), ])
+                connection.commit()
+
+                username = form.username.data
+                email = form.email.data
+                phone = form.phone.data
+
+
+                lang_name = cursor.execute( "SELECT lang_name, lang_email, lang_phone FROM Drivers WHERE lang_name = ?",(username,),).fetchall()
+                for user in lang_name:
+                    print(user.count)
+                username = user.split("() ")
+                print(username)
+                print('buscando el usuario')
+                lang_email = cursor.execute( "SELECT lang_email FROM Drivers WHERE lang_email = ?",(email,),).fetchall()
+                print(lang_email)
+                print('buscando el email {lang_email}')
+
+                lang_phone = cursor.execute( "SELECT lang_phone FROM Drivers WHERE lang_phone = ?",(phone,),).fetchall()
+                print(lang_phone)
+                print('buscando el phone {lang_phone}')
+
+                if "Luis" == "Luis":
+                    print('El usuario ya Existe')
+                elif form.email.data == lang_email:
+                    print('El Email ya esta registrado')
+                elif form.phone.data == lang_phone:
+                    print('El Email ya esta registrado')
+                else:
+                    print('no hay coincidencia')
+
+
+
 
                 #user = User(username=form.username.data, password=hashed_password, email=form.email.data, phone=form.phone.data)
                 #db.session.add(user)
                 #db.session.commit
                 #session.modified = True
                 #cursor  =  cnxn . cursor ()
-                
-                lang_list = [
-                    ("lang_name", form.username.data),
-                    ("lang_email", form.email.data),
-                    ("lang_passwordb", hashed_password),
-                    ("lang_phone", form.password.data),
-                    ]
-                cursor.execute("INSERT INTO Drivers(lang_name) VALUES('?,?')", ("lang_name", 3))
-                
-                for row in cursor.execute('SELECT * FROM Drivers ORDER BY lang_name'):
-                    print(row)
-                connection.commit()
+                rows = cursor.execute( "SELECT lang_email FROM Drivers WHERE lang_name = ?",(target_fish_name,),).fetchall()
+                print(rows)
+#                for row in cursor.execute('SELECT * FROM Drivers ORDER BY lang_name'):
+#                    print(row)
+                connection.close()
+
                 return redirect(url_for('core.index'))
     
 
