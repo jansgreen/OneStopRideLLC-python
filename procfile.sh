@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ "$DEBUG" = "True" ]; then
+if [ "$DEBUG" = "False" ]; then
         FLASK_ENV="development"
         python run.py
 else
