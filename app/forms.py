@@ -20,3 +20,14 @@ class LoginForm(FlaskForm):
     email = StringField(label='Email', validators=[DataRequired(), Email()])
     phone = StringField(label='Number Phone')
     submit = SubmitField(label='Login')
+
+
+class registerInfoUserForm(FlaskForm):
+    PrimerNombre = StringField(label='Primer Nombre', validators=[DataRequired(), Length (min=2, max=20)])
+    SegunNombre = StringField(label='Si existe, Ingrese su segundo nombre', validators=[Length (min=2, max=20)])
+    PrimerApellido = StringField(label='Primer Apellido', validators=[DataRequired(), Length (min=2, max=20)])
+    SegundoApellido = StringField(label='Si existe, Ingrese su segundo apellido', validators=[Length (min=2, max=20)])
+    SSN = StringField(label='Numero de su Social Security Number')
+    NumeroIdentidad = StringField(label='El numero de Licencia de Conducir')
+    Direccion = StringField(label='Si existe, Ingrese su segundo nombre', validators=[Length (min=2, max=20)])
+    submit = SubmitField(label='Siguente')

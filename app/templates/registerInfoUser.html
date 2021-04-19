@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-12 col-md-12 align-self-center">
+      <h1 class="mb-2">Ingresa las informaciones del usuario</h1>
+    </div>
+  </div>
+  <div class="row lign-items-center mt-1 mb-1">
+    <div class="col-4 align-self-center mt-5 mb-5">
+      <legend><h3>Paso 2</h3>
+        <div class="progress">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </legend>
+      <form action="register" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        <fieldset class="form-group">
+          {{form.PrimerNombre.label(class="form-control-label")}}
+          {% if form.PrimerNombre.errors %}
+
+          {{form.PrimerNombre(class="form-control form-control-lg is-invalid")}}
+          {% for error in form.PrimerNombre.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{ form.PrimerNombre(class="form-control form-control-lg")}}
+          {% endif %}
+
+        </fieldset>
+        <fieldset class="form-group">
+
+          {% if form.SegunNombre.errors %}
+          {{form.SegunNombre.label(class="form-control-label")}}
+          {{form.SegunNombre(class="form-control form-control-lg is-invalid")}}
+
+          {% for error in form.SegunNombre.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{form.SegunNombre.label(class="form-control-label")}}
+          {{ form.SegunNombre(type="text", class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+        <fieldset class="form-group">
+
+          {% if form.PrimerApellido.errors %}
+          {{form.PrimerApellido.label(class="form-control-label")}}
+          {{form.PrimerApellido(class="form-control form-control-lg is-invalid")}}
+
+          {% for error in form.PrimerApellido.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{form.PrimerApellido.label(class="form-control-label")}}
+          {{ form.PrimerApellido(type="text", class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+        <fieldset class="form-group">
+
+          {% if form.SegundoApellido.errors %}
+          {{form.SegundoApellido.label(class="form-control-label")}}
+          {{form.SegundoApellido(class="form-control form-control-lg is-invalid")}}
+
+          {% for error in form.SegundoApellido.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{form.SegundoApellido.label(class="form-control-label")}}
+          {{ form.SegundoApellido(type="text", class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+        <fieldset class="form-group">
+
+          {% if form.SSN.errors %}
+          {{form.SSN.label(class="form-control-label")}}
+          {{form.SSN(class="form-control form-control-lg is-invalid")}}
+
+          {% for error in form.SSN.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{form.SSN.label(class="form-control-label")}}
+          {{ form.SSN(type="number", class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+        <fieldset class="form-group">
+
+          {% if form.NumeroIdentidad.errors %}
+          {{form.NumeroIdentidad.label(class="form-control-label")}}
+          {{form.NumeroIdentidad(class="form-control form-control-lg is-invalid")}}
+
+          {% for error in form.NumeroIdentidad.errors %}
+            <span>{{error}}</span>
+          {% endfor %}
+          {% else %}
+          {{form.NumeroIdentidad.label(class="form-control-label")}}
+          {{ form.NumeroIdentidad(type="number", class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+        <fieldset class="form-group">
+          {{form.Direccion.label(class="form-control-label")}}
+
+          {% if form.Direccion.errors %}
+          {{form.Direccion.label(class="form-control-label")}}
+          {% for error in form.Direccion.errors %}
+            <span>{{error}}</span>
+          {{form.Direccion(class="form-control form-control-lg is-invalid")}}
+          {% endfor %}
+          {% else %}
+          {{ form.Direccion(class="form-control form-control-lg")}}
+          {% endif %}
+        </fieldset>
+
+        {{form.submit(class="btn btn-success")}}
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
